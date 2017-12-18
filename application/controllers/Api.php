@@ -1,32 +1,37 @@
 <?php
-Class Welcome extends CI_Controller{
-    
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+require APPPATH . '/libraries/REST_Controller.php';
+// use Restserver\Libraries\REST_Controller;
+
+class Api extends REST_Controller {
+
     var $google_api_key = "";
     var $google_api_url = "";
     var $darksky_api_key = "";
     var $darksky_api_url = "";
 
-    function __construct() {
-        parent::__construct();
-        date_default_timezone_set('Asia/Jakarta');
+    function __construct($config = 'rest') {
+        parent::__construct($config);
         $this->load->library('curl');
-        
+
         $this->google_api_url = "https://maps.googleapis.com/maps/api/geocode/json";
         $this->google_api_key = "AIzaSyBOtOwoMtFgcWfxMDeox8c9-YgH-sHkBT4";
         
         $this->darksky_api_url = "https://api.darksky.net/forecast/";
         $this->darksky_api_key = "6bfdd322a546de5a7e6d965dc6bec4a5/";
     }
-    
-    function index(){
-        if ($this->input->post("submit") && $this->input->post("lokasi") != null) {
-            $data['detail_lokasi'] = $this->google_data($this->input->post('lokasi'));
-            $data['detail_cuaca'] = $this->darksky_data($data['detail_lokasi']['lat'], $data['detail_lokasi']['lng'], "id")->currently;
-            $data['lokasi'] = $this->input->post('lokasi');
-            $this->load->view('loaded', $data);            
+
+    function index_get() {
+        $lokasi = $this->get('lokasi');
+        if ($lokasi == null) {
+            
         } else {
-            $this->load->view('main');            
+            $data['detail_lokasi'] = $this->google_data(urlencode($lokasi));
+            $data['detail_cuaca'] = $this->darksky_data($data['detail_lokasi']['lat'], $data['detail_lokasi']['lng'], "id")->currently;
         }
+        $this->response($data, 200);
     }
 
     private function google_data($lokasi) {
@@ -47,6 +52,6 @@ Class Welcome extends CI_Controller{
 
         return $data_api;
     }
-    
 
 }
+?>
