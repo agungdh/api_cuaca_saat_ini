@@ -22,7 +22,7 @@ Class Welcome extends CI_Controller{
         if ($this->input->post("submit")) {
             $detail_lokasi = $this->google_data($this->input->post('lokasi'));
 
-            echo "alamat = " . $detail_lokasi['alamat'] . "<br>";
+            echo $detail_lokasi['alamat'] . "<br>";
             // echo "lat = " . $detail_lokasi['lat'] . "<br>";
             // echo "lng = " . $detail_lokasi['lng'] . "<br>";
 
@@ -31,11 +31,24 @@ Class Welcome extends CI_Controller{
             $date = new DateTime();
             $date->setTimestamp($detail_cuaca->time);
 
-            echo $date->format('d-m-Y H:i:s');
-            echo "<br>";
-            echo $detail_cuaca->summary;
-            echo "<br>";
-            var_dump($detail_cuaca);
+            echo $date->format('d-m-Y H:i:s') . "<br>";
+            echo $detail_cuaca->summary . "<br>";
+            echo $detail_cuaca->icon . "<br>";
+            echo $detail_cuaca->precipIntensity . "<br>";
+            echo $detail_cuaca->precipProbability . "<br>";
+            echo $detail_cuaca->precipType . "<br>";
+            echo $detail_cuaca->temperature . "<br>";
+            echo $detail_cuaca->apparentTemperature . "<br>";
+            echo $detail_cuaca->dewPoint . "<br>";
+            echo $detail_cuaca->humidity . "<br>";
+            echo $detail_cuaca->pressure . "<br>";
+            echo $detail_cuaca->windSpeed . "<br>";
+            echo $detail_cuaca->windGust . "<br>";
+            echo $detail_cuaca->windBearing . "<br>";
+            echo $detail_cuaca->cloudCover . "<br>";
+            echo $detail_cuaca->uvIndex . "<br>";
+            echo $detail_cuaca->visibility . "<br>";
+            echo $detail_cuaca->ozone . "<br>";
         } else {
             $this->load->view('main');            
         }
