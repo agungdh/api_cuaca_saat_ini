@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/ci_api_server/';
+$config['base_url'] = 'http://localhost/api_cuaca_saat_ini/';
 // $config['base_url'] = 'http://192.168.7.2/ci_captcha/';
 // $config['base_url'] = 'http://192.168.43.24/pum_elearning/';
 
