@@ -22,7 +22,7 @@ Class Welcome extends CI_Controller{
         if ($this->input->post("submit")) {
             $detail_lokasi = $this->google_data($this->input->post('lokasi'));
 
-            echo $detail_lokasi['alamat'] . "<br>";
+            echo "Lokasi = " . $detail_lokasi['alamat'] . "<br>";
             // echo "lat = " . $detail_lokasi['lat'] . "<br>";
             // echo "lng = " . $detail_lokasi['lng'] . "<br>";
 
@@ -30,25 +30,12 @@ Class Welcome extends CI_Controller{
             
             $date = new DateTime();
             $date->setTimestamp($detail_cuaca->time);
-
-            echo $date->format('d-m-Y H:i:s') . "<br>";
-            echo $detail_cuaca->summary . "<br>";
-            echo $detail_cuaca->icon . "<br>";
-            echo $detail_cuaca->precipIntensity . "<br>";
-            echo $detail_cuaca->precipProbability . "<br>";
-            echo $detail_cuaca->precipType . "<br>";
-            echo $detail_cuaca->temperature . "<br>";
-            echo $detail_cuaca->apparentTemperature . "<br>";
-            echo $detail_cuaca->dewPoint . "<br>";
-            echo $detail_cuaca->humidity . "<br>";
-            echo $detail_cuaca->pressure . "<br>";
-            echo $detail_cuaca->windSpeed . "<br>";
-            echo $detail_cuaca->windGust . "<br>";
-            echo $detail_cuaca->windBearing . "<br>";
-            echo $detail_cuaca->cloudCover . "<br>";
-            echo $detail_cuaca->uvIndex . "<br>";
-            echo $detail_cuaca->visibility . "<br>";
-            echo $detail_cuaca->ozone . "<br>";
+            echo "Waktu = " . $date->format('d-m-Y H:i:s') . "<br>";
+            echo "Cuaca = " . $detail_cuaca->summary . "<br>";
+            echo "Suhu = " . ($detail_cuaca->temperature - 32) / 1.8 . "<br>";
+            echo "Kecepatan Angin = " . $detail_cuaca->windSpeed * 1.609 . "<br>";
+            echo "Kecepatan Angin = " . $detail_cuaca->windSpeed  . "<br>";
+            echo "Kelembaban = " . $detail_cuaca->humidity . "<br>";
         } else {
             $this->load->view('main');            
         }
